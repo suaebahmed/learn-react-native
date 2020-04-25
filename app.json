@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "test transition",
+    "slug": "test-transition",
+    "version": "1.0.0",
+    "android": {
+      "package": "com.myCompany",
+      "versionCode": 1
+    },
+    "platforms": [
+      "android"
+    ],
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
