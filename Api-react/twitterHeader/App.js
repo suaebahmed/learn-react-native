@@ -17,7 +17,8 @@ class App extends Component {
     }
     render() {
         const headerHeight = this.state.scrollY.interpolate({
-            inputRange: [0,HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
+            // inputRange: [0,HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
+            inputRange: [0,20],
             outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
             extrapolate: 'clamp'
         })
@@ -40,11 +41,12 @@ class App extends Component {
                 }} >
                 </Animated.View>
 
-                <ScrollView style={{
-                    flex: 1,
-                }}
+                <ScrollView
+                    style={{ flex: 1 }}
                     scrollEventThrottle={16}
-                    onScroll={e=>{console.log(e)}}
+                    onScroll={Animated.event([
+                        { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
+                    ])}       
                 >
                     <View style={{
                         height: PROFILE_IMAGE_MAX_HEIGHT,
@@ -54,7 +56,7 @@ class App extends Component {
                         marginTop: HEADER_MAX_HEIGHT -( PROFILE_IMAGE_MAX_HEIGHT / 2),
                         marginLeft: 15
                     }}>
-                        <Image style={{flex: 1,height: null,width: null}} source={require("../../assets/no-image.png")}>
+                    <Image style={{flex: 1,height: null,width: null}} source={require("../../assets/no-image.png")}>
                     </Image>
                     </View>
                     <View>

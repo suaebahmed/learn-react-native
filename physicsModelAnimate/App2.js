@@ -20,7 +20,7 @@ const interection = (dragValue,getureState)=>{
 
     return cond(eq(getureState,State.ACTIVE),
     [
-        cond(dragging,0[set(dragging,1),set(start,position)]),
+        cond(dragging,0,[set(dragging,1),set(start,position)]),
         stopClock(clock),
         // dt
         divide(debug('diff clock: ',diff(clock)),1000),

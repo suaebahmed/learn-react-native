@@ -4,11 +4,13 @@ import { View, StyleSheet, TextInput } from 'react-native'
 function Input(props) {
     return (
         <TextInput 
-        onChangeText={props.onChangeText}
+        // onChangeText={props.onChangeText}
+        // value={props.enteredValue}
+        // keyboardType={props.keyboardType}
+
+        {...props}  /// instead doing marny you can Once!;
         autoCapitalize="none"
-        keyboardType={props.keyboardType}
         autoCorrect={false}
-        value={props.enteredValue}
         style={styles.input}/>
     )
 }
