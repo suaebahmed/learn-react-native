@@ -107,10 +107,14 @@ export default class KittenCard extends Component {
         })
     }
     handleNo =()=>{
-
+        Animated.timing(this.state.animation.x,{
+            toValue: -SWIPE_THRESHOLD
+        }).start(this.transitionNext());
     }
     handleYes =()=>{
-
+        Animated.timing(this.state.animation.x,{
+            toValue: SWIPE_THRESHOLD
+        }).start(this.transitionNext());
     }
     render() {
         const { animation } = this.state;
@@ -121,11 +125,38 @@ export default class KittenCard extends Component {
         })
         const opacity = animation.y.interpolate({
             inputRange: [-200,0,200],
-            outputRange: [.5,1,.5],
+            outputRange: [.5,1,.1],
             extrapolate: 'clamp'
         })
-
-
+        // nope! for yes
+        const yesOpacity = animation.x.interpolate({
+            inputRange: [0,150],
+            outputRange: [0,1]
+        })
+        const yesScale = animation.x.interpolate({
+            inputRange: [0,150],
+            outputRange: [0.5,1],
+            extrapolate: 'clamp'
+        })
+        // same yes interpolate
+        const noOpacity = animation.x.interpolate({
+            inputRange: [-150,0],
+            outputRange: [1,0]
+        })
+        const noScale = animation.x.interpolate({
+            inputRange: [-150,0],
+            outputRange: [1,0.5],
+            extrapolate: 'clamp'
+        })
+        // nope! style 
+        const animatedNopeStyles = {
+            transform: [{scale: noScale},{rotate: "20deg"}],
+            opacity: noOpacity,
+        } // same nope! style
+        const animatedYupStyles = {
+            transform: [{scale: yesScale},{rotate: "-20deg"}],
+            opacity: yesOpacity,
+        }
         
         const animtedCardStyles = {
             opacity: this.state.opacity,
@@ -154,7 +185,7 @@ export default class KittenCard extends Component {
                              cardStyle = isLastItem ? animtedCardStyles : undefined,
                              imgeStyle = isLastItem ? animtedImageStyle : undefined,
                              nextStyle = isSecondToLast ? {transform: [{scale: this.state.next}]} : undefined;
-                        console.log(this.state.items)
+
 
                         return (
                             <Animated.View 
@@ -164,6 +195,17 @@ export default class KittenCard extends Component {
 
                             >
                                     <Text style={styles.lowerText}>{text}</Text>
+
+                                    {isLastItem && 
+                                    <Animated.View style={[styles.nope,animatedNopeStyles]}>
+                                        <Text style={styles.nopeText}>Nope!</Text>
+                                    </Animated.View>
+                                    }
+                                    {isLastItem && 
+                                    <Animated.View style={[styles.yup,animatedYupStyles]}>
+                                        <Text style={styles.yupText}>Yes!</Text>
+                                    </Animated.View>}
+
                             </Animated.View>
                         )
                     })
@@ -171,12 +213,16 @@ export default class KittenCard extends Component {
                </View>
                <View style={styles.buttonBar}>
                     <TouchableOpacity 
+                        onPress={this.handleNo}
+                        style={styles.buttonNo}
                     >
-                        <Text>No</Text>
+                        <Text style={{color: 'red'}}>No</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
+                        onPress={this.handleYes}
+                        style={styles.buttonYes}
                     >
-                        <Text>Yes</Text>
+                        <Text style={{color: 'green'}}>Yes</Text>
                     </TouchableOpacity>
 
                </View>
@@ -216,5 +262,49 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         padding: 5,
+    },
+    buttonNo:{
+        borderColor: 'red',
+        borderWidth: 2,
+        borderRadius: '50%',
+        padding: 15,
+        margin: 3,
+        backgroundColor: '#FFF'
+    },
+    buttonYes:{
+        borderColor: 'green',
+        borderWidth: 2,
+        borderRadius: '50%',
+        padding: 15,
+        margin: 3,
+        backgroundColor: '#FFF'
+    },
+    nope: {
+        borderColor: 'red',
+        borderWidth: 2,
+        position: 'absolute',
+        padding: 20,
+        borderRadius: 5,
+        top: 20,
+        right: 20,
+        backgroundColor: '#FFF'
+    },
+    nopeText: {
+        fontSize: 16,
+        color: 'red'
+    },
+    yup: {
+        borderColor: 'green',
+        borderWidth: 2,
+        position: 'absolute',
+        padding: 20,
+        borderRadius: 5,
+        top: 20,
+        left: 20,
+        backgroundColor: '#FFF'
+    },
+    yupText: {
+        fontSize: 16,
+        color: 'green'
     }
 })
