@@ -3,7 +3,7 @@ import {
   View,
   StyleSheet,
   } from 'react-native';
-import BasicAnimate from './fundamental-animation/model/App'
+import BasicAnimate from './fundamental-animation/rn-animation/App'
 
 function App() {
   return (
