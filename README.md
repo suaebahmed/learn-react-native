@@ -6,4 +6,4 @@
 
 ## react-native animation fundamental
 <h5>Folder name: fundamental-animation</h5>
-<p>I learning from CodeDaily.io</p>
+<p>I am learning from CodeDaily.io</p>
