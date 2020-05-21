@@ -21,7 +21,11 @@ componentWillMount (){
                 { dx : this.av.x, dy: this.av.y }
             ]),
             onPenResponderRelease : (e, gestureState)=>{
-                  this.av.flattenOffset();
+              //   value = x  
+              //   Offset = 0
+              //   Overall value = x + 0
+
+              this.av.flattenOffset();
                   
                   Animated.decay( this.av,{
                      deceleration : 0.99,
@@ -31,6 +35,26 @@ componentWillMount (){
                      }
                   }).start()
             }
-            
-      
+      })
+
+ rander(){
+       const animatedStyle ={
+             transform : this.av.getTranslateTransform()
+       }
+       return (
+          <Animated.View
+             style={[styles.box, animatedStyle]}
+             {this._panResponder.panHandlers}
+          >
+          <Animated.View>
+
+      )
+   }
+}
+const styles = {
+   box: {
+     width : 120,
+     height : 120,
+     backgroundColor: "orange"
+  }
 }
