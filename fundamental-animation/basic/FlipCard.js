@@ -4,10 +4,10 @@ import { Text, StyleSheet, View, Animated, Button } from 'react-native'
 export default class FlipCard extends Component {
     componentWillMount(){
         this.animatedValue = new Animated.Value(0);
-        this.value = new Animated.Value(0);
+
+        this.value = 0
         this.animatedValue.addListener(({value})=>{
             this.value = value;
-            // console.log(value,'valie')
         })
         this.frontInterpolate = this.animatedValue.interpolate({
             inputRange: [0,180],
@@ -72,11 +72,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
         borderRadius: 5,
         margin: 20,
-        // backfaceVisibility: 'hidden'
+        backfaceVisibility: 'hidden'
     },
     flipAb:{
-        // position: 'absolute',
-        // top: 0,
+        position: 'absolute',
+        top: 0,
     },
     text:{
         fontSize: 26,
