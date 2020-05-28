@@ -1,4 +1,12 @@
-###  update in 15 RAMADAN
+
+npm install expo-cli --global
+----
+expo init myNewProject
+cd myNewProject
+expo start
+----
+
+##  update in 15 RAMADAN
 
 ## UI Doctor Care
 <h5>Folder name: ui</h5>
